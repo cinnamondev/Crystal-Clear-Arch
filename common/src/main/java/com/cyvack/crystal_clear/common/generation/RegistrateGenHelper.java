@@ -17,12 +17,13 @@ import com.simibubi.create.Create;
 import com.simibubi.create.content.decoration.MetalScaffoldingBlock;
 import com.simibubi.create.content.decoration.MetalScaffoldingCTBehaviour;
 import com.simibubi.create.content.decoration.palettes.AllPaletteBlocks;
-import com.simibubi.create.content.kinetics.BlockStressDefaults;
+import com.simibubi.create.infrastructure.config.CStress;
+//import com.simibubi.create.content.kinetics.BlockStressDefaults;
 import com.simibubi.create.content.kinetics.simpleRelays.CogWheelBlock;
 import com.simibubi.create.foundation.block.connected.CTSpriteShiftEntry;
 import com.simibubi.create.foundation.block.connected.SimpleCTBehaviour;
 import com.simibubi.create.foundation.data.CreateRegistrate;
-import com.simibubi.create.foundation.utility.Couple;
+import net.createmod.catnip.data.Couple;
 import com.tterrag.registrate.AbstractRegistrate;
 import com.tterrag.registrate.builders.BlockBuilder;
 import com.tterrag.registrate.providers.RegistrateRecipeProvider;
@@ -127,7 +128,7 @@ public class RegistrateGenHelper {
         return reg.block(newName, factory)
                 .properties(BlockBehaviour.Properties::noOcclusion)
                 .properties(RegistrateGenHelper::glassProperties)
-                .transform(BlockStressDefaults.setNoImpact())
+                //.transform(CStress.setNoImpact())
                 .loot((p, lb) -> p.dropOther(lb, AllBlocks.SHAFT))
                 .addLayer(() -> RenderType::cutout)
                 .onRegister(CreateRegistrate.connectedTextures(() -> new GlassEncasedCTBehaviour(ctEntry)))
@@ -198,7 +199,7 @@ public class RegistrateGenHelper {
 
         return b.properties(BlockBehaviour.Properties::noOcclusion)
                 .properties(RegistrateGenHelper::glassProperties)
-                .transform(BlockStressDefaults.setNoImpact())
+                //.transform(CStress.setNoImpact())
                 .addLayer(() -> RenderType::cutout)
                 .initialProperties(() -> Blocks.GLASS)
                 .onRegister(CreateRegistrate.casingConnectivity((block, cc) -> cc.make(block, casingShift.get(),

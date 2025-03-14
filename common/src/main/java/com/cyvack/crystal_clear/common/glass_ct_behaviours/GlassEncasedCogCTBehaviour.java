@@ -3,7 +3,7 @@ package com.cyvack.crystal_clear.common.glass_ct_behaviours;
 import com.simibubi.create.content.kinetics.simpleRelays.encased.EncasedCogCTBehaviour;
 import com.simibubi.create.content.kinetics.simpleRelays.encased.EncasedShaftBlock;
 import com.simibubi.create.foundation.block.connected.CTSpriteShiftEntry;
-import com.simibubi.create.foundation.utility.Couple;
+import net.createmod.catnip.data.Couple;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.BlockAndTintGetter;
