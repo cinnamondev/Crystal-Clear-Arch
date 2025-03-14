@@ -17,8 +17,7 @@ import com.simibubi.create.Create;
 import com.simibubi.create.content.decoration.MetalScaffoldingBlock;
 import com.simibubi.create.content.decoration.MetalScaffoldingCTBehaviour;
 import com.simibubi.create.content.decoration.palettes.AllPaletteBlocks;
-import com.simibubi.create.infrastructure.config.CStress;
-//import com.simibubi.create.content.kinetics.BlockStressDefaults;
+import com.simibubi.create.api.stress.BlockStressValues;
 import com.simibubi.create.content.kinetics.simpleRelays.CogWheelBlock;
 import com.simibubi.create.foundation.block.connected.CTSpriteShiftEntry;
 import com.simibubi.create.foundation.block.connected.SimpleCTBehaviour;
@@ -53,6 +52,7 @@ public class RegistrateGenHelper {
 
     //builders//
     public static <T extends AbstractRegistrate<?>> BlockEntry<GlassCasing> glassCasing(T reg, CasingHolder holder, boolean clear) {
+
         String name = holder.name();
         String newName = !clear ? name + "_glass_casing" : name + "_clear_glass_casing";
         CTSpriteShiftEntry ctEntry = CCSpriteShifts.GLASS_CASING_SHIFTS.get(name).get(clear);
@@ -129,6 +129,7 @@ public class RegistrateGenHelper {
                 .properties(BlockBehaviour.Properties::noOcclusion)
                 .properties(RegistrateGenHelper::glassProperties)
                 //.transform(CStress.setNoImpact())
+                .onRegister(block -> BlockStressValues.IMPACTS.register(block, () -> 0f))
                 .loot((p, lb) -> p.dropOther(lb, AllBlocks.SHAFT))
                 .addLayer(() -> RenderType::cutout)
                 .onRegister(CreateRegistrate.connectedTextures(() -> new GlassEncasedCTBehaviour(ctEntry)))
@@ -200,6 +201,7 @@ public class RegistrateGenHelper {
         return b.properties(BlockBehaviour.Properties::noOcclusion)
                 .properties(RegistrateGenHelper::glassProperties)
                 //.transform(CStress.setNoImpact())
+                .onRegister(block -> BlockStressValues.IMPACTS.register(block, () -> 0f))
                 .addLayer(() -> RenderType::cutout)
                 .initialProperties(() -> Blocks.GLASS)
                 .onRegister(CreateRegistrate.casingConnectivity((block, cc) -> cc.make(block, casingShift.get(),
